@@ -1,0 +1,14 @@
+.header{
+    min-height: 75px;
+    background-color: darkcyan;
+    text-align: center;    
+}
+
+.title{
+    font-size: x-large;
+    font-weight: bold;
+    width: 40%;
+    text-align: center;
+    margin: auto;
+}
+

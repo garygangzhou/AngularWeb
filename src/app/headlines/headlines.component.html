@@ -1,0 +1,41 @@
+<div class='headlines'>
+    <div class='leftpane'>
+        <span>Country:</span>
+        <ul>
+            <li><a href="javascript:void(0);" (click)="getNews('ca')">CA</a></li>            
+            <li><a href="javascript:void(0);" (click)="getNews('cn')">CN</a></li>
+            <li><a href="javascript:void(0);" (click)="getNews('us')">US</a></li>             
+        </ul>
+        <!--
+        <span>Category:</span>
+        <ul>
+            <li>business</li>
+            <li>entertainment</li>
+            <li>general</li>
+            <li>health</li>
+            <li>science</li>
+            <li>sports</li>
+            <li>technology</li>
+        </ul>
+        -->
+    </div>
+    <div class='rightpane'>        
+        <div *ngIf="news.articles != null; else showNoNews">   
+            <app-pager [news]=news [numberPerPage]=pageSize (pageChangeEvent)="pagerChangeEvent($event)"></app-pager>
+            <hr>  
+            <div>page: {{ currentPage }}</div>  
+            <div  *ngFor='let n of news.articles'>
+                <p>Source: {{ n.source.name }}</p>
+                <p>Author: {{ n.author }}</p>
+                <p>Time: {{ n.publishedAt }}</p>
+                <p>Description: {{ n.description }}</p>
+                <p>Content: {{ n.content }}</p>
+                <a href="{{ n.url }}" target="_blank">{{ n.url }}</a>
+                <hr>
+            </div>
+        </div>
+    <ng-template #showNoNews>
+        <p>There is no news</p>
+    </ng-template>
+    </div>
+</div>

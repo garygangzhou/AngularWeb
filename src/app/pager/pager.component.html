@@ -1,0 +1,10 @@
+<div *ngIf="news != null && news.articles != null">
+    <div>Total: {{ news.totalResults }} </div>
+    <!-- <div>#items per page: {{ numberPerPage }} </div>
+    <div>Number of page: {{ numberOfPages() }}</div> -->    
+    <ul>
+        <li *ngFor="let n of range(1, numberOfPages())">
+            <a id= "{{pagerpage_prefix}}{{n}}" (click)="pageChange($event)" >{{ n }}</a>
+        </li>
+    </ul>
+</div>

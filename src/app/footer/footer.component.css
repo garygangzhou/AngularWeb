@@ -1,0 +1,19 @@
+.footer{
+    min-height: 75px;
+    background-color: darkcyan;
+    text-align: center;   
+    margin-top: 15px; 
+}
+
+.footer > .title{
+    font-size: x-large;
+    font-weight: bold;
+    width: 40%;
+    text-align: center;
+    margin: auto;
+}
+
+.footer > a{
+    color: black;
+}
+

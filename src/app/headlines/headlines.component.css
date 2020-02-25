@@ -1,0 +1,24 @@
+.headlines{
+    width: 100%;
+    min-height: 300px;
+    height: auto;    
+    position: relative;
+}
+
+.leftpane{
+    background-color: lightseagreen;
+    width: 100px;
+    float: left;
+    
+}
+
+.rightpane{
+    margin-left: 100px;
+    padding: 15px
+    
+}
+
+li{
+    text-decoration: underline;
+    margin-top: 10px;    
+}
