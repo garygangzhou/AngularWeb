@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,10 +12,10 @@ import { HeadlinesComponent } from './headlines/headlines.component';
 import { AllnewsComponent } from './allnews/allnews.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OtherComponent } from './other/other.component';
-import { PagerComponent } from './pager/pager.component';
+// import { PagerComponent } from './pager/pager.component';
 
 @NgModule({
-  declarations: [
+  declarations: [    
     AppComponent,
     HeaderComponent,
     FooterComponent,
@@ -23,12 +24,14 @@ import { PagerComponent } from './pager/pager.component';
     AllnewsComponent,
     PageNotFoundComponent,
     OtherComponent,
-    PagerComponent
+    // NgxPaginationModule,
+    // PagerComponent
   ],
-  imports: [
+  imports: [    
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

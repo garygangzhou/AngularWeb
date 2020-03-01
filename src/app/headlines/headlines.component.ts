@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { NewsResponse } from '../model/news'
 import { NewsService } from '../news-service.service';
 
-
 @Component({
   selector: 'app-headlines',
   templateUrl: './headlines.component.html',
@@ -13,46 +12,52 @@ import { NewsService } from '../news-service.service';
 export class HeadlinesComponent implements OnInit {
 
   news: NewsResponse;
-  currentPage: string = "1";
-  pageSize: string = "5";
-  currentCountry: string = "";
+  theCurrentPage: string = "1"  
+  theCurrentCountry: string = "";
+  pageSize: string = "6"; 
+  p: number = 1;
 
   constructor(private newsSrv: NewsService, private route: ActivatedRoute) { }
 
   ngOnInit() {   
-    this.getNews(this.currentCountry);
+    this.getNews(this.theCurrentCountry);
   }
 
   getNews(country: string){  
-    if ( !country )
-     {  
-       this.currentCountry = "";
-       this.currentPage = "1";
+    if ( !country ){  
+       this.theCurrentCountry = "";
+       this.theCurrentPage = "1";
         this.news = new NewsResponse();
+        return;
      }
 
-    if ( sessionStorage.getItem(country + "_" + this.currentPage) != null ){
-      this.news = JSON.parse(sessionStorage.getItem(country + "_" + this.currentPage));
+    if ( sessionStorage.getItem(country + "_" + this.theCurrentPage) != null ){
+      this.news = JSON.parse(sessionStorage.getItem(country + "_" + this.theCurrentPage));
+      this.p = parseInt(this.theCurrentPage);
+      return ;
     }
 
     if (country){
-      if (this.currentCountry != country)
-        this.currentPage = "1";
-        
-      this.currentCountry = country;
+      if (this.theCurrentCountry != country)
+      {  
+        this.theCurrentPage = "1";
+        this.theCurrentCountry = country;
+        this.p = parseInt(this.theCurrentPage);
+      }
       
-    this.newsSrv.getNews_Headlines(this.currentCountry, this.currentPage, this.pageSize).subscribe(n => {  
+    this.newsSrv.getNews_Headlines(this.theCurrentCountry, this.theCurrentPage, this.pageSize).subscribe(n => {  
        this.news = n;
-       sessionStorage.setItem(this.currentCountry + "_" + this.currentPage, JSON.stringify(n));
+       sessionStorage.setItem(this.theCurrentCountry + "_" + this.theCurrentPage, JSON.stringify(n));
+       this.p = parseInt(this.theCurrentPage);
      });
     }
   }
 
-  //handle bubble event
-  pagerChangeEvent(thecurrentPage: string){
-   // console.log(thecurrentPage);
-     this.currentPage = thecurrentPage;
-     this.getNews(this.currentCountry);
+  //handle page change
+  pagerChangeEvent(currentPage: number){        
+     console.log("current page: " + currentPage);
+     this.theCurrentPage = currentPage.toString();
+     this.getNews(this.theCurrentCountry);
   }
 }
 

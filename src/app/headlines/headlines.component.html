@@ -21,10 +21,10 @@
     </div>
     <div class='rightpane'>        
         <div *ngIf="news.articles != null; else showNoNews">   
-            <app-pager [news]=news [numberPerPage]=pageSize (pageChangeEvent)="pagerChangeEvent($event)"></app-pager>
             <hr>  
-            <div>page: {{ currentPage }}</div>  
-            <div  *ngFor='let n of news.articles'>
+            <div>page: {{p}}, total: {{news.totalResults}}</div> 
+            <pagination-controls id='headlinepager' (pageChange)="pagerChangeEvent($event)" ></pagination-controls> 
+            <div *ngFor='let n of news.articles | paginate: {id:"headlinepager",  itemsPerPage: pageSize,  currentPage: p, totalItems: news.totalResults }'>
                 <p>Source: {{ n.source.name }}</p>
                 <p>Author: {{ n.author }}</p>
                 <p>Time: {{ n.publishedAt }}</p>
@@ -32,7 +32,7 @@
                 <p>Content: {{ n.content }}</p>
                 <a href="{{ n.url }}" target="_blank">{{ n.url }}</a>
                 <hr>
-            </div>
+            </div>            
         </div>
     <ng-template #showNoNews>
         <p>There is no news</p>
