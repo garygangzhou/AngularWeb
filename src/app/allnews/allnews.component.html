@@ -1,17 +1,20 @@
 <div >    
     <div>Keywords: </div>
     <input #keywordbox   >
-    <button (click)="getNews(keywordbox.value)" >Refresh</button>
+    <button (click)="getNews_btnHandler(keywordbox.value)" >Refresh</button>
     <div>Total: {{news.totalResults }} </div>
-    <hr>
-    <div *ngIf="news.articles != null; else showNoNews">
-        <div *ngFor='let n of news.articles '>
-            <p>Source: {{ n.source.name }}</p>
-            <p>Author: {{ n.author }}</p>
-            <p>Time: {{ n.publishedAt }}</p>
-            <p>Description: {{ n.description }}</p>
-            <p>Content: {{ n.content }}</p>
-            <a href="{{ n.url }}" target="_blank">{{ n.url }}</a>
+    <hr>    
+    <div *ngIf="news.articles != null; else showNoNews" >
+        <pagination-controls id='allnewspager' 
+            (pageChange)="pagerChangeEvent($event)" ></pagination-controls> 
+        <div *ngFor='let n of news.articles 
+        | paginate: {
+                id: "allnewspager",  
+                itemsPerPage: pageSize,  
+                currentPage: theCurrentPage, 
+                totalItems: news.totalResults 
+            }' >
+            <app-article [article]= n ></app-article>
             <hr>
         </div>
     </div>

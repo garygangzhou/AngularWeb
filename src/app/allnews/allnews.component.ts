@@ -11,21 +11,39 @@ import { NewsService } from '../news-service.service';
 export class AllnewsComponent implements OnInit {
 
   news: NewsResponse;  
+  pageSize: number = 10;
+  theCurrentPage: number = 1 ;
+  theCurrentKeyword: string = "";
 
   constructor(private newsSrv: NewsService, private route: ActivatedRoute) { }
 
   ngOnInit() {    
-    this.getNews("");
+    this.getNews();
   }
 
-  getNews(keyword: string){  
-    if ( keyword  ){
-      this.newsSrv.getNews_Everything(keyword).subscribe(n => {
+  getNews_btnHandler(keyword: string){
+    console.log(keyword);
+
+    // new search
+    this.theCurrentPage = 1;
+    this.theCurrentKeyword = keyword;
+    return this.getNews();
+  }
+
+  getNews(){  
+    if ( this.theCurrentKeyword ){    
+      this.newsSrv.getNews_Everything(this.theCurrentKeyword, this.theCurrentPage, this.pageSize).subscribe(n => {
          this.news = n;
     });
     }
     else{
       this.news = new NewsResponse();
     }   
+  }
+
+  pagerChangeEvent(currentPage: number){
+    // handle pager event
+    this.theCurrentPage = currentPage;
+    this.getNews();
   }
 }

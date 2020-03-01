@@ -5,7 +5,7 @@ import { NewsResponse } from './model/news';
 
 const httpOptions = {
   headers: new HttpHeaders({
-   // 'content-type': 'application/json',
+    
     'X-Api-Key': 'a5b751178b794c7e9e1b71980a1cd2b6'
   })
 };
@@ -22,24 +22,25 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
 
-  getNews_Headlines(country: string, page: string, pageSize: string): Observable<NewsResponse> {
+  getNews_Headlines(country: string, page: number, pageSize: number): Observable<NewsResponse> {
       let url = this.apiUrl_headlines.replace("__cn__", country);
       if ( page && pageSize)
         url = url + "&page=" + page + "&pageSize=" + pageSize;
       return this.http.get<NewsResponse>(url, httpOptions);      
   }
 
-  getNews_Everything(queryWord: string): Observable<NewsResponse>{      
-      return this.http.get<NewsResponse>(`${this.apiUrl_everything}?q=${queryWord}`, httpOptions);
+  getNews_Everything(queryWord: string, page: number, pageSize: number): Observable<NewsResponse>{  
+    let url = `${this.apiUrl_everything}?q=${queryWord}&page=${page}&pageSize=${pageSize}`;
+      return this.http.get<NewsResponse>(url, httpOptions);
   }
 
-  getNews_Everything_Obj(queryWord: string): NewsResponse{
-    let news: NewsResponse;
-    this.getNews_Everything(queryWord).subscribe(n => {  
-      news = n;
+  // getNews_Everything_Obj(queryWord: string): NewsResponse{
+  //   let news: NewsResponse;
+  //   this.getNews_Everything(queryWord).subscribe(n => {  
+  //     news = n;
 
-      console.log(n)
-    });
-    return news;
-  }
+  //     console.log(n)
+  //   });
+  //   return news;
+  // }
 }

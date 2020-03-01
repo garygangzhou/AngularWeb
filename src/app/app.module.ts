@@ -12,7 +12,7 @@ import { HeadlinesComponent } from './headlines/headlines.component';
 import { AllnewsComponent } from './allnews/allnews.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { OtherComponent } from './other/other.component';
-// import { PagerComponent } from './pager/pager.component';
+import { ArticleComponent } from './article/article.component';
 
 @NgModule({
   declarations: [    
@@ -24,8 +24,8 @@ import { OtherComponent } from './other/other.component';
     AllnewsComponent,
     PageNotFoundComponent,
     OtherComponent,
+    ArticleComponent,
     // NgxPaginationModule,
-    // PagerComponent
   ],
   imports: [    
     BrowserModule,

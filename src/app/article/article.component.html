@@ -1,0 +1,11 @@
+<div class="left-image">
+    <img alt="news image" src="{{ article.urlToImage}}" >
+</div>
+<div class="right-content">
+    <p>Source: {{ article.source.name }}</p>
+    <p>Author: {{ article.author }}</p>
+    <p>Time: {{ article.publishedAt }}</p>
+    <p>Description: {{ article.description }}</p>
+    <p>Content: {{ article.content }}</p>
+    <a href="{{ article.url }}" target="_blank">{{ article.url }}</a>
+</div>

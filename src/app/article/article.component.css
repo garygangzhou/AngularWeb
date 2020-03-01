@@ -1,0 +1,20 @@
+.left-image
+{
+    width: 150px;
+    height: 150px;
+    float: left;
+}
+
+img{
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+    width: 120px;
+    height: 120px;
+}
+.right-content
+{
+    display: block;
+    width: 100%;
+    margin-left: 160px;
+}
